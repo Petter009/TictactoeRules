@@ -16,14 +16,31 @@ namespace TicTacToe.Services
 
         public char Validate(char[,] gameBoard)
         {
-            var currentWinningSymbol = CheckForThreeInARowInHorizontalRow(gameBoard);
+            var currentWinningSymbol = CheckForThreeInARowInFirstHorizontalRow(gameBoard);
+            if (currentWinningSymbol != SymbolForNoWinner)
+                return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowInSecondHorizontalRow(gameBoard);
+            if (currentWinningSymbol != SymbolForNoWinner)
+                return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowInThirdHorizontalRow(gameBoard);
             if (currentWinningSymbol != SymbolForNoWinner)
                 return currentWinningSymbol;
             currentWinningSymbol = CheckForThreeInARowInVerticalColumn(gameBoard);
             if (currentWinningSymbol != SymbolForNoWinner)
                 return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowIn2ndVerticalColumn(gameBoard);
+            if (currentWinningSymbol != SymbolForNoWinner)
+                return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowIn3rdVerticalColumn(gameBoard);
+            if (currentWinningSymbol != SymbolForNoWinner)
+                return currentWinningSymbol;
+            currentWinningSymbol = CheckForThreeInARowDiagonallytoleft(gameBoard);
+            if (currentWinningSymbol != SymbolForNoWinner)
+                return currentWinningSymbol;
+
             currentWinningSymbol = CheckForThreeInARowDiagonally(gameBoard);
             return currentWinningSymbol;
+
         }
 
         private static char CheckForThreeInARowInVerticalColumn(char[,] gameBoard)
@@ -39,7 +56,33 @@ namespace TicTacToe.Services
             return SymbolForNoWinner;
         }
 
-        private static char CheckForThreeInARowInHorizontalRow(char[,] gameBoard)
+        private static char CheckForThreeInARowIn2ndVerticalColumn(char[,] gameBoard)
+        {
+            var rowOneChar = gameBoard[0, 1];
+            var rowTwoChar = gameBoard[1, 1];
+            var rowThreeChar = gameBoard[2, 1];
+            if (rowOneChar == rowTwoChar &&
+                rowTwoChar == rowThreeChar)
+            {
+                return rowOneChar;
+            }
+            return SymbolForNoWinner;
+        }
+
+        private static char CheckForThreeInARowIn3rdVerticalColumn(char[,] gameBoard)
+        {
+            var rowOneChar = gameBoard[0, 2];
+            var rowTwoChar = gameBoard[1, 2];
+            var rowThreeChar = gameBoard[2, 2];
+            if (rowOneChar == rowTwoChar &&
+                rowTwoChar == rowThreeChar)
+            {
+                return rowOneChar;
+            }
+            return SymbolForNoWinner;
+        }
+
+        private static char CheckForThreeInARowInFirstHorizontalRow(char[,] gameBoard)
         {
             var columnOneChar = gameBoard[0, 0];
             var columnTwoChar = gameBoard[0, 1];
@@ -52,11 +95,48 @@ namespace TicTacToe.Services
             return SymbolForNoWinner;
         }
 
+        private static char CheckForThreeInARowInSecondHorizontalRow(char[,] gameBoard)
+        {
+            var columnOneChar = gameBoard[1, 0];
+            var columnTwoChar = gameBoard[1, 1];
+            var columnThreeChar = gameBoard[1, 2];
+            if (columnOneChar == columnTwoChar &&
+                columnTwoChar == columnThreeChar)
+            {
+                return columnOneChar;
+            }
+            return SymbolForNoWinner;
+        }
+        private static char CheckForThreeInARowInThirdHorizontalRow(char[,] gameBoard)
+        {
+            var columnOneChar = gameBoard[2, 0];
+            var columnTwoChar = gameBoard[2, 1];
+            var columnThreeChar = gameBoard[2, 2];
+            if (columnOneChar == columnTwoChar &&
+                columnTwoChar == columnThreeChar)
+            {
+                return columnOneChar;
+            }
+            return SymbolForNoWinner;
+        }
+
         private static char CheckForThreeInARowDiagonally(char[,] gameBoard)
         {
             var cellOneChar = gameBoard[0, 0];
             var cellTwoChar = gameBoard[1, 1];
             var cellThreeChar = gameBoard[2, 2];
+            if (cellOneChar == cellTwoChar &&
+                cellTwoChar == cellThreeChar)
+            {
+                return cellOneChar;
+            }
+            return SymbolForNoWinner;
+        }
+        private static char CheckForThreeInARowDiagonallytoleft(char[,] gameBoard)
+        {
+            var cellOneChar = gameBoard[0, 2];
+            var cellTwoChar = gameBoard[1, 1];
+            var cellThreeChar = gameBoard[2, 0];
             if (cellOneChar == cellTwoChar &&
                 cellTwoChar == cellThreeChar)
             {

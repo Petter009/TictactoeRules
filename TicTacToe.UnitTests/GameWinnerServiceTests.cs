@@ -45,6 +45,30 @@ namespace TicTacToe.UnitTests
         }
 
         [Test]
+        public void PlayerWithAllSpacesIn2ndRowIsWinner()
+        {
+            const char expected = 'X';
+            for (var rowIndex = 0; rowIndex < 3; rowIndex++)
+            {
+                _gameBoard[1, rowIndex] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [Test]
+        public void PlayerWithAllSpacesIn3rdRowIsWinner()
+        {
+            const char expected = 'X';
+            for (var rowIndex = 0; rowIndex < 3; rowIndex++)
+            {
+                _gameBoard[2, rowIndex] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [Test]
         public void PlayerWithAllSpacesInFirstColumnIsWinner()
         {
             const char expected = 'X';
@@ -63,6 +87,42 @@ namespace TicTacToe.UnitTests
             for (var cellIndex = 0; cellIndex < 3; cellIndex++)
             {
                 _gameBoard[cellIndex, cellIndex] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [Test]
+        public void PlayerWithThreeInARowDiagonallyDownAndToLeftIsWinner()
+        {
+            const char expected = 'X';
+            for (var cellIndex = 0; cellIndex < 3; cellIndex++)
+            {
+                _gameBoard[cellIndex, 2] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [Test]
+        public void PlayerWithAllSpacesSecondColumnIsWinner()
+        {
+            const char expected = 'X';
+            for (var secondcolumnIndex = 0; secondcolumnIndex < 3; secondcolumnIndex++)
+            {
+                _gameBoard[secondcolumnIndex, 1] = expected;
+            }
+            var actual = _gameWinnerService.Validate(_gameBoard);
+            Assert.AreEqual(expected.ToString(), actual.ToString());
+        }
+
+        [Test]
+        public void PlayerWithAllSpacesInThirdColumnIsWinner()
+        {
+            const char expected = 'X';
+            for (var columnIndex = 0; columnIndex < 3; columnIndex++)
+            {
+                _gameBoard[columnIndex, 2] = expected;
             }
             var actual = _gameWinnerService.Validate(_gameBoard);
             Assert.AreEqual(expected.ToString(), actual.ToString());
